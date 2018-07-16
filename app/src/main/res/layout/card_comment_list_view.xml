@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <ImageView
+
+
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/roundimage"
+            />
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="12dp"
+            android:padding="8dp"
+            android:ems="10"
+
+            android:text="Comments"
+            />
+        <!--android:background="@android:color/transparent"-->
+
+        <!--android:textColor="@color/white"-->
+        <!--android:textColorHint="@color/white"-->
+    </LinearLayout>
+
+</LinearLayout>
+    <TextView
+        android:id="@+id/tvComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="12dp"
+        android:padding="8dp"
+        android:ems="10"
+
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis arcu libero, in feugiat metus varius luctus. Nullam efficitur ac nulla eget dapibus. Aliquam erat volutpat. Etiam tempor sapien orci, vel imperdiet diam facilisis in. Quisque ac dapibus tortor. Vivamus in commodo lorem. Proin maximus diam scelerisque, hendrerit metus eget, aliquet magna. Mauris condimentum mattis rhoncus. Integer accumsan metus ante, volutpat volutpat justo tempus faucibus. Mauris eu convallis lectus."
+        />
+
+</LinearLayout>

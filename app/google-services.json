@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "418702521806",
+    "firebase_url": "https://skywalkertest-1.firebaseio.com",
+    "project_id": "skywalkertest-1",
+    "storage_bucket": "skywalkertest-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418702521806:android:b24906c9db4a432f",
+        "android_client_info": {
+          "package_name": "cpp.skywalker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418702521806-qkcqpq2mttibndgb0h94o9q2m0b3p8ru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cpp.skywalker",
+            "certificate_hash": "b327b17bd8b40017553fe390964aa6ce1d6d2a14"
+          }
+        },
+        {
+          "client_id": "418702521806-a832kpe99itm6a4j82fljfg27tbp4ske.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeawvQn9ALXq5a0ER-5xVJj7oiZ5Ev8pg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418702521806-a832kpe99itm6a4j82fljfg27tbp4ske.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
