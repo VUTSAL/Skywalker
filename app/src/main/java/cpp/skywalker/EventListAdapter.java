@@ -1,8 +1,13 @@
 package cpp.skywalker;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +27,16 @@ import java.util.Date;
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.EventViewHolder> {
 
     //arraylist of all the food within the some distance only
+
     private ArrayList<GetEventListInfo> getEventListInfo = new ArrayList<>();
     //List view activity Context to inflate the card view
     private EventListActivity context;
     //Storage reference
+    private Bundle arguments = new Bundle();
+    GetUserInfo userInfo=null;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     StorageReference filepath;
+
     //for firebase authentication
     //Current user properties
     //GetUserInfo currentUserInfo;
@@ -38,6 +47,12 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         getEventListInfo = eventDetails;
         context = eventListActivity;
 
+
+    }
+    public EventListAdapter(EventListActivity eventListActivity, ArrayList<GetEventListInfo> eventDetails,GetUserInfo UInfo) {
+        getEventListInfo = eventDetails;
+        context = eventListActivity;
+        userInfo=UInfo;
 
     }
     @NonNull
@@ -61,7 +76,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         holder.txtLocation.setText(getEventListInfo.get(position).Location);
         holder.txtTime.setText( "On:"+getEventListInfo.get(position).FromDate+"-"+getEventListInfo.get(position).ToDate+"At:"+getEventListInfo.get(position).FromTime+"-"+getEventListInfo.get(position).ToTime);
         //Getthig the image of the food
-//        filepath = storageReference.child("Todays Food").child(strDate).child(todayFoodInfo.get(position).user_name + "_" + todayFoodInfo.get(position).dish_name);
+//        filepath = storageReference.child(userInfo.user_name).child()
 //        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 //            @Override
 //            public void onSuccess(Uri uri) {
@@ -70,16 +85,25 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 //                var.urlOfTodaysFoodImage.put(todayFoodInfo.get(position).user_name + "_" + todayFoodInfo.get(position).dish_name, uri.toString());
 //            }
 //        });
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, SeekerClickedTodaysFoodInfo.class);
-//                intent.putExtra("current_user_info", currentUserInfo);
-//
-//                intent.putExtra("current_value", position);
-//                context.startActivity(intent);
-//            }
-//        });
+        final int index=position;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Fragment eventInfo = new frgEventInfo();
+                arguments.putSerializable( "UserInfo" , userInfo);
+                arguments.putString( "UniqueID" , getEventListInfo.get(index).UniqueID);
+                arguments.putString( "Position" ,""+index);
+                arguments.putSerializable("EventDetails",getEventListInfo.get(index));
+                //This will set the bundle as an argument to the object
+                eventInfo.setArguments(arguments);
+                FragmentManager fragmentManager = (context).getFragmentManager();
+
+                fragmentManager.beginTransaction().replace(R.id.mainContent, eventInfo).commit();
+                v.setVisibility(v.GONE);
+
+            }
+        });
 
     }
 

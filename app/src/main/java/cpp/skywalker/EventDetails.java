@@ -10,10 +10,10 @@ public class EventDetails implements Serializable {
     public String Location;
     public String HostedBy;
     public String ShortDescription;
-    public String Description;
+    public String Agenda;
     public int MemberCount;
 
-    public ArrayList<Comments> commntList;
+    public ArrayList<Comments> commentList;
     public ArrayList<String>UserName;
 
 

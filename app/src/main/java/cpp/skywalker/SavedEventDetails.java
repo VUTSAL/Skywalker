@@ -19,5 +19,9 @@ public class SavedEventDetails {
     public String ToTime;
     public String CreatedDate;
     public String HostedBy;
+    public String UniqueID;
+    public ArrayList<Comments> CommentList;
+    public ArrayList<String>Members;
+
 
 }

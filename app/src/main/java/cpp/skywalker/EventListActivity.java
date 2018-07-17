@@ -54,6 +54,7 @@ public class EventListActivity extends AppCompatActivity
    GetEventListInfo [] getEventListInfoArray = null;
     // this is to save the information as an object of the food within 30 miles
     ArrayList<GetEventListInfo> getEventListInfoList = new ArrayList<>();
+    FloatingActionButton fabEvent ;//= (FloatingActionButton) findViewById(R.id.fab);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class EventListActivity extends AppCompatActivity
         StorageReference storageReference;
         StorageReference filepath;
         recyclerView = (RecyclerView) findViewById(R.id.rvEventList);
+        fabEvent = (FloatingActionButton) findViewById(R.id.fab);
 //--------------------------Load List-----------------------------------------------------
         databaseReference = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl(getString(R.string.firebaseDBPath)+"EventDetails/");
@@ -128,7 +130,7 @@ public class EventListActivity extends AppCompatActivity
 //--------------------------Load List-----------------------------------------------------
 
  //--------------------------Fab Event-----------------------------------------------------
-        final FloatingActionButton fabEvent = (FloatingActionButton) findViewById(R.id.fab);
+        //final FloatingActionButton fabEvent = (FloatingActionButton) findViewById(R.id.fab);
         fabEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,10 +213,17 @@ public class EventListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void showFloatingActionButton() {
+        fabEvent.show();
+    }
+
+    public void hideFloatingActionButton() {
+        fabEvent.hide();
+    }
     void createListView(){
 
 
-        EventListAdapter eventListAdapter = new EventListAdapter(EventListActivity.this,getEventListInfoList);
+        EventListAdapter eventListAdapter = new EventListAdapter(EventListActivity.this,getEventListInfoList,this.userInfo);
 
 
         Log.v("getEventlistCOunt",Integer.toString(getEventListInfoList.size()));

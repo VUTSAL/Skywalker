@@ -44,7 +44,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
     @Override
     public CommentsListAdapter.CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.card_event_list_view, parent, false);
+        View v = inflater.inflate(R.layout.card_comment_list_view, parent, false);
         return new CommentViewHolder(v);
 
     }
@@ -53,8 +53,8 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
     public void onBindViewHolder(@NonNull CommentsListAdapter.CommentViewHolder holder, int position) {
 
 
-        holder.tvUserName.setText( getComments.get(position).Name);
-        holder.tvComments.setText(getComments.get(position).Comments);
+        holder.tvUserName.setText(getComments.get(position).Name); //getComments.get(position).Name
+        holder.tvComments.setText(getComments.get(position).Comments);//getComments.get(position).Comments
         //Getthig the image of the food
 //        filepath = storageReference.child("Todays Food").child(strDate).child(todayFoodInfo.get(position).user_name + "_" + todayFoodInfo.get(position).dish_name);
 //        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

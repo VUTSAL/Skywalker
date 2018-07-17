@@ -7,6 +7,9 @@
     tools:context=".frgEventInfo">
 
     <!-- TODO: Update blank fragment layout -->
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -132,6 +135,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
+                android:scaleType="centerCrop"
                 android:src="@drawable/placeholder" />
 
 
@@ -148,51 +152,52 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/Comments"
+                    android:id="@+id/rvComments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
 
             </android.support.v4.widget.NestedScrollView>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <EditText
-                android:id="@+id/etComments"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="Comments"
-                android:padding="8dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                >
+                <EditText
+                    android:id="@+id/etComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Comments"
+                    android:padding="8dp"
 
 
-                />
+                    android:layout_weight="2"
 
-            <Button
-                android:id="@+id/btnComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/login_button"
-                android:clickable="true"
-                android:padding="16dp"
-                android:text="Comment"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="#354e66"
-                android:textSize="18sp" />
 
+                    />
+
+                <Button
+                    android:id="@+id/btnComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="4"
+                    android:background="@drawable/login_button"
+                    android:clickable="true"
+
+                    android:text="Comment"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#354e66"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
         </LinearLayout>
+
 
 
     </ScrollView>

@@ -8,6 +8,10 @@ public class Comments implements Serializable{
     public  String ImgUrl;
     public  String Comments;
 
+    public Comments()
+    {
+
+    }
     public  Comments(String name,String comments,String url)
     {
         Name=name;

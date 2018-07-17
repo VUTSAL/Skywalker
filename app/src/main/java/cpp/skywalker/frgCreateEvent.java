@@ -59,7 +59,7 @@ public class frgCreateEvent extends Fragment {
     SimpleDateFormat mdmformat = new SimpleDateFormat("mm");
     String currentMonth= mdmformat.format(calendar.getTime());
 
-    SimpleDateFormat mddformat = new SimpleDateFormat("yyyy");
+    SimpleDateFormat mddformat = new SimpleDateFormat("dd");
     String currentDay= mddformat.format(calendar.getTime());
 
     private final static int GALLARY_INTENT = 2;
@@ -90,7 +90,7 @@ public class frgCreateEvent extends Fragment {
         userInfo = (GetUserInfo) intent.getSerializable("UserInfo");
 
         //Initializing all the variables here
-        final StorageReference filepath = storageReferenceForEvent.child(userInfo.user_name).child(savedEventDetails.Title + "_" + currentYear+"_"+currentMonth+"_"+currentDay);
+
         //-------------------------------------------------------------------------------------------------------------------------------------------//
        progressDialog = new ProgressDialog(applicationContext);
 
@@ -106,13 +106,6 @@ public class frgCreateEvent extends Fragment {
         previewEventHolder.tpToTime=(TimePicker)    rootView.findViewById(R.id.tpToTime);
         previewEventHolder.btnCreateEvent=(Button)    rootView.findViewById(R.id.btnCreateEvent);
 
-        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-
-                Glide.with(frgCreateEvent.this).load(uri.toString()).apply(RequestOptions.circleCropTransform()).into(previewEventHolder.ivEventPhoto);
-            }
-        });
 
         //If user clicks to change the profile photo
         previewEventHolder.ivEventPhoto.setOnClickListener(new View.OnClickListener() {
@@ -153,26 +146,41 @@ public class frgCreateEvent extends Fragment {
                 savedEventDetails.Location=previewEventHolder.etLocation.getText().toString();
                 savedEventDetails.ShortDescription=previewEventHolder.etShortDescription.getText().toString();
                 savedEventDetails.Agenda=previewEventHolder.etAgenda.getText().toString();
+                savedEventDetails.HostedBy=userInfo.user_name;
 
                 savedEventDetails.CreatedDate=savedEventDetails.CreatedDate==null || savedEventDetails.CreatedDate=="" ?(currentYear+"/"+currentMonth+"/"+currentDay):savedEventDetails.CreatedDate;
                 savedEventDetails.Agenda=previewEventHolder.etAgenda.getText().toString();
 
+                //final StorageReference filepath = storageReferenceForEvent.child(userInfo.user_name).child(savedEventDetails.UniqueID);
+
+//                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//
+//                        Glide.with(frgCreateEvent.this).load(uri.toString()).apply(RequestOptions.circleCropTransform()).into(previewEventHolder.ivEventPhoto);
+//                    }
+//                });
 
                 DatabaseReference databaseReferenceForEvent = FirebaseDatabase.getInstance().getReferenceFromUrl(getString(R.string.firebaseDBPath)+"EventDetails/");
-                StorageReference filepath = storageReferenceForEvent.child(userInfo.user_name).child(savedEventDetails.Title + "_" + currentYear+"_"+currentMonth+"_"+currentDay);
+
                 progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setMessage("Uploading...");
                 progressDialog.show();
 
+                savedEventDetails.UniqueID=userInfo.user_name+"_"+savedEventDetails.Title.trim().replace(" ","") + "_" + currentYear+"_"+currentMonth+"_"+currentDay;
                 //Saving the data for providers only
-
-                databaseReferenceForEvent.push().setValue(savedEventDetails);
+                StorageReference filepath = storageReferenceForEvent.child(userInfo.user_name).child(savedEventDetails.UniqueID);
+                databaseReferenceForEvent.child(savedEventDetails.UniqueID).setValue(savedEventDetails);
                 filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Log.v("upload done", "upload done");
                         progressDialog.hide();
-                        getActivity().onBackPressed();
+                        Intent intent=new Intent(context,EventListActivity.class);
+                        intent.putExtra("userInfo",userInfo);
+                        startActivity(intent);
+
+                        //getActivity().onBackPressed();
                         //getFragmentManager().popBackStack();
                     }
                 });
@@ -182,6 +190,7 @@ public class frgCreateEvent extends Fragment {
         });
         return rootView;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);

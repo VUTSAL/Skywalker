@@ -195,6 +195,7 @@
             android:layout_height="150dp"
             android:clickable="true"
             android:id="@+id/ivEventPhoto"
+            android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
             />
         <Button

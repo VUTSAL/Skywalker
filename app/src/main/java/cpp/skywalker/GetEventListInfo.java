@@ -17,6 +17,7 @@ public class GetEventListInfo implements Serializable {
     public String FromTime;
     public String ToTime;
     public String CreatedDate;
-    public ArrayList<Comments> commntList;
-    public ArrayList<String>UserName;
+    public  String UniqueID;
+    public ArrayList<Comments> CommentList;
+    public ArrayList<String>Members;
 }
