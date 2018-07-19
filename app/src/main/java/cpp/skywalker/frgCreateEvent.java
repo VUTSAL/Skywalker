@@ -74,6 +74,15 @@ public class frgCreateEvent extends Fragment {
     }
     SavedEventDetails savedEventDetails=new SavedEventDetails();
     PreviewEventHolder previewEventHolder = new PreviewEventHolder();
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Intent int1=new Intent(context,EventListActivity.class);
+        int1.putExtra("userInfo",userInfo);
+        startActivity(int1);
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
@@ -87,7 +96,7 @@ public class frgCreateEvent extends Fragment {
        final Bundle intent = getArguments();
 
 
-        userInfo = (GetUserInfo) intent.getSerializable("UserInfo");
+        userInfo = (GetUserInfo) intent.getSerializable("userInfo");
 
         //Initializing all the variables here
 

@@ -34,7 +34,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"/>
+            android:layout_marginTop="2dp"
+            android:background="@android:color/black"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,48 +54,63 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"/>
+            android:layout_marginTop="2dp"
+            android:background="@android:color/black"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:textColor="@color/white"
-            android:lines="5"
-            android:scrollbars="vertical"
+
+
             android:id="@+id/etLocation"
-            android:ems="10"
-            android:background="@drawable/edittextborderall"
-            android:drawablePadding="12dp"
+
+
+
             android:padding="8dp"
             android:hint="Address,city,state,zipcode"
 
 
             android:textColorHint="@color/white"
-            android:maxLines="1"
 
             />
+        <!--android:ems="10"-->
+        <!--android:drawablePadding="12dp"-->
+        <!--android:maxLines="1"-->
+        <!--android:lines="1"-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/white"/>-->
+        <!--android:background="@drawable/edittextborderall"-->
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:textColor="@color/white"
-            android:lines="12"
+            android:lines="3"
             android:scrollbars="vertical"
             android:id="@+id/etAgenda"
             android:ems="10"
-            android:background="@drawable/edittextborderall"
-            android:drawablePadding="12dp"
+            android:layout_marginTop="2dp"
+
             android:padding="8dp"
             android:hint="Agenda"
             android:textColorHint="@color/white"
-            android:maxLines="1"
+            android:maxLines="5"
+
 
             />
-
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/white"/>-->
+        <!--android:background="@drawable/edittextborderall"-->
+        <!--android:drawablePadding="12dp"-->
         <LinearLayout
             android:layout_width="match_parent"
-
+            android:layout_marginTop="2dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
@@ -110,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
+
                     android:calendarViewShown="false"
                     ></DatePicker>
             <TimePicker
@@ -117,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:timePickerMode="spinner"
+                android:visibility="gone"
                 ></TimePicker>
             <!--<EditText-->
                 <!--android:id="@+id/etFromDate"-->
@@ -138,7 +156,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"/>
+            android:layout_marginTop="2dp"
+            android:background="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
                 android:calendarViewShown="false"
+
                 ></DatePicker>
             <TimePicker
                 android:id="@+id/tpToTime"
@@ -166,6 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:timePickerMode="spinner"
+                android:visibility="gone"
                 ></TimePicker>
             <!--<EditText-->
                 <!--android:id="@+id/etToDate"-->
@@ -186,7 +207,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white"/>
+            android:layout_marginTop="2dp"
+            android:background="@android:color/black"/>
 
         <ImageView
 

@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.firebase.database.ChildEventListener;
@@ -59,6 +62,9 @@ public class EventListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context=this;
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         contextOfApplication=getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
@@ -134,14 +140,16 @@ public class EventListActivity extends AppCompatActivity
         fabEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setVisibility(view.GONE);
                 Fragment event = new frgCreateEvent();
-                arguments.putSerializable( "UserInfo" , userInfo);
+                arguments.putSerializable( "userInfo" , userInfo);
                 //This will set the bundle as an argument to the object
                 event.setArguments(arguments);
                 FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
 
                 fragmentManager.beginTransaction().replace(R.id.mainContent, event).commit();
-                view.setVisibility(view.GONE);
+
+
 //                Intent intLogin=new Intent(EventListActivity.this, LoginActivity.class);
 //                startActivity(intLogin);
             }
@@ -182,9 +190,9 @@ public class EventListActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -195,19 +203,19 @@ public class EventListActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

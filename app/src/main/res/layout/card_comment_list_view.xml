@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
+    android:orientation="vertical"
     >
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="10dp"
     >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,6 +24,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/roundimage"
             />
@@ -40,8 +43,6 @@
         <!--android:textColor="@color/white"-->
         <!--android:textColorHint="@color/white"-->
     </LinearLayout>
-
-</LinearLayout>
     <TextView
         android:id="@+id/tvComments"
         android:layout_width="match_parent"
@@ -49,8 +50,13 @@
         android:drawablePadding="12dp"
         android:padding="8dp"
         android:ems="10"
-
+        android:layout_marginLeft="20dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis arcu libero, in feugiat metus varius luctus. Nullam efficitur ac nulla eget dapibus. Aliquam erat volutpat. Etiam tempor sapien orci, vel imperdiet diam facilisis in. Quisque ac dapibus tortor. Vivamus in commodo lorem. Proin maximus diam scelerisque, hendrerit metus eget, aliquet magna. Mauris condimentum mattis rhoncus. Integer accumsan metus ante, volutpat volutpat justo tempus faucibus. Mauris eu convallis lectus."
         />
+</LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
 </LinearLayout>

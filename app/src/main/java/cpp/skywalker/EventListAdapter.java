@@ -4,8 +4,19 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -74,7 +85,35 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         holder.txtEventTitle.setText( getEventListInfo.get(position).Title);
         holder.txtEventShortDescription.setText(getEventListInfo.get(position).ShortDescription);
         holder.txtLocation.setText(getEventListInfo.get(position).Location);
-        holder.txtTime.setText( "On:"+getEventListInfo.get(position).FromDate+"-"+getEventListInfo.get(position).ToDate+"At:"+getEventListInfo.get(position).FromTime+"-"+getEventListInfo.get(position).ToTime);
+
+        int Count=getEventListInfo.get(position).Members!=null && getEventListInfo.get(position).Members.size()>0? getEventListInfo.get(position).Members.size():0;
+        holder.txtMemberCount.setText(Count==0?"No members yet":Count+" members");
+
+        holder.txtTime.setText( "On:"+getEventListInfo.get(position).FromDate+"-"+getEventListInfo.get(position).ToDate);//+"At:"+getEventListInfo.get(position).FromTime+"-"+getEventListInfo.get(position).ToTime
+
+
+//        Uri uri = Uri.parse("android.resource://cpp.skywalker/drawable/user1_stark");
+//        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.context.getContentResolver(), uri);
+        Bitmap bitmap1= BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.user1_stark);
+        Bitmap bitmap2= BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.user2_stark);
+        Bitmap bitmap3= BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.user3_stark);
+
+        Bitmap resized1 = Bitmap.createScaledBitmap(bitmap1, 100, 100, true);
+        Bitmap conv_bm1 = getRoundedRectBitmap(resized1, 100);
+        holder.imgUser1.setImageBitmap(conv_bm1);
+
+
+        Bitmap resized2 = Bitmap.createScaledBitmap(bitmap2, 100, 100, true);
+        Bitmap conv_bm2 = getRoundedRectBitmap(resized2, 100);
+        holder.imgUser2.setImageBitmap(conv_bm2);
+
+
+        Bitmap resized3 = Bitmap.createScaledBitmap(bitmap3, 100, 100, true);
+        Bitmap conv_bm3 = getRoundedRectBitmap(resized3, 100);
+        holder.imgUser3.setImageBitmap(conv_bm3);
         //Getthig the image of the food
 //        filepath = storageReference.child(userInfo.user_name).child()
 //        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -91,7 +130,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             @Override
             public void onClick(View v) {
                 Fragment eventInfo = new frgEventInfo();
-                arguments.putSerializable( "UserInfo" , userInfo);
+                arguments.putSerializable( "userInfo" , userInfo);
                 arguments.putString( "UniqueID" , getEventListInfo.get(index).UniqueID);
                 arguments.putString( "Position" ,""+index);
                 arguments.putSerializable("EventDetails",getEventListInfo.get(index));
@@ -138,4 +177,30 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
         }
     }
+    public static Bitmap getRoundedRectBitmap(Bitmap bitmap, int pixels) {
+        Bitmap result = null;
+        try {
+            result = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+                    Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(result);
+
+            int color = 0xff424242;
+            Paint paint = new Paint();
+            Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            RectF rectF = new RectF(rect);
+            int roundPx = pixels;
+
+            paint.setAntiAlias(true);
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect, rect, paint);
+        } catch (NullPointerException e) {
+// return bitmap;
+        } catch (OutOfMemoryError o){}
+        return result;
+    }
+
 }

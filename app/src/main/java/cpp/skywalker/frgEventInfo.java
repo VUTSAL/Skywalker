@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.MediaStore;
 //import android.support.v4.app.Fragment;
@@ -95,6 +96,14 @@ public class frgEventInfo extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        Intent int1=new Intent(context,EventListActivity.class);
+        int1.putExtra("userInfo",userInfo);
+        startActivity(int1);
+
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -110,7 +119,7 @@ public class frgEventInfo extends Fragment {
         boolean userJoined=false;
         UniqueID =intent.getString("UniqueID");
         Position=Integer.parseInt(intent.getString("Position"));
-        userInfo = (GetUserInfo) intent.getSerializable("UserInfo");
+        userInfo = (GetUserInfo) intent.getSerializable("userInfo");
         getEventListInfo = (GetEventListInfo) intent.getSerializable("EventDetails");
 
 
@@ -155,10 +164,13 @@ public class frgEventInfo extends Fragment {
         previewEventHolder.etComments.setVisibility(View.GONE);
         previewEventHolder.btnComment.setVisibility(View.GONE);
 
-        Log.v("Check if user",""+(savedEventDetails.HostedBy==userInfo.user_name));
-        Log.v("Members not null",""+(savedEventDetails.Members!=null));
-        Log.v("member size count",""+(savedEventDetails.Members.size()>0));
-
+//        Log.v("Check if user",""+(savedEventDetails.HostedBy==userInfo.user_name));
+//        Log.v("Members not null",""+(savedEventDetails.Members!=null));
+//        Log.v("member size count",""+(savedEventDetails.Members.size()>0));
+if(userInfo!=null && savedEventDetails.HostedBy.equals(userInfo.user_name))
+{
+    previewEventHolder.btnSubmit.setVisibility(View.GONE);
+}
         if((!(savedEventDetails.HostedBy==userInfo.user_name)) && savedEventDetails.Members!=null && savedEventDetails.Members.size()>0) {
             for (String str : savedEventDetails.Members) {
                 if (str.equals(userInfo.user_name)) {
@@ -202,6 +214,7 @@ public class frgEventInfo extends Fragment {
                     previewEventHolder.etComments.setVisibility(View.GONE);
                     previewEventHolder.btnComment.setVisibility(View.GONE);
                     previewEventHolder.btnSubmit.setText("J O I N");
+
                 }
                 else{
                     savedEventDetails.Members.add(userInfo.user_name);
@@ -233,8 +246,10 @@ public class frgEventInfo extends Fragment {
 //                       
 //                    }
 //                });
-
-                Toast.makeText(applicationContext, "Joined Event", Toast.LENGTH_SHORT).show();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(frgEventInfo.this).attach(frgEventInfo.this).commit();
+            String msg=userJoinStatus?"Left the event":"Joined the event.Congrats!";
+                Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show();
             }
         });
 
